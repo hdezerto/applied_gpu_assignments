@@ -1,0 +1,18 @@
+==9494== NVPROF is profiling process 9494, command: cuda/lud_cuda -i ../../data/lud/2048.dat
+==9494== Profiling application: cuda/lud_cuda -i ../../data/lud/2048.dat
+==9494== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   51.59%  1.3465ms         1  1.3465ms  1.3465ms  1.3465ms  [CUDA memcpy HtoD]
+                   48.41%  1.2638ms         1  1.2638ms  1.2638ms  1.2638ms  [CUDA memcpy DtoH]
+      API calls:   82.20%  48.565ms         1  48.565ms  48.565ms  48.565ms  cudaMalloc
+                   12.92%  7.6324ms       382  19.980us      80ns  7.5998ms  cudaLaunchKernel
+                    4.52%  2.6674ms         2  1.3337ms  1.3299ms  1.3375ms  cudaMemcpy
+                    0.18%  106.00us       114     929ns      40ns  45.000us  cuDeviceGetAttribute
+                    0.16%  92.800us         1  92.800us  92.800us  92.800us  cudaFree
+                    0.01%  8.5100us         1  8.5100us  8.5100us  8.5100us  cuDeviceGetName
+                    0.01%  5.0200us         1  5.0200us  5.0200us  5.0200us  cuDeviceGetPCIBusId
+                    0.00%  1.0300us         3     343ns     100ns     820ns  cuDeviceGetCount
+                    0.00%     220ns         1     220ns     220ns     220ns  cuDeviceTotalMem
+                    0.00%     210ns         2     105ns      80ns     130ns  cuDeviceGet
+                    0.00%     200ns         1     200ns     200ns     200ns  cuModuleGetLoadingMode
+                    0.00%      90ns         1      90ns      90ns      90ns  cuDeviceGetUuid

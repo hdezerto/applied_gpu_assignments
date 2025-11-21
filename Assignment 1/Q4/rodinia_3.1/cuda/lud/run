@@ -1,0 +1,1 @@
+nvprof cuda/lud_cuda -i ../../data/lud/2048.dat
