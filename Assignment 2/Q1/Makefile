@@ -19,4 +19,4 @@ debug: $(SRC)
 
 
 clean: $(SRC)
-	rm -f $(EXE) resultRef.txt hostBins.txt
+	rm -f debug.out a.out resultRef.txt hostBins.txt

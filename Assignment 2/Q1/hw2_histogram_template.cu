@@ -56,10 +56,10 @@ int main(int argc, char **argv) {
 
   if(argc < 3){
       printf("missing input length variable and/or choice of input value distribution\n");
-      printf("{input length variable} {0,1,2} where:");
-      printf("0: uniform distribution");
-      printf("1: normal distribution");
-      printf("2: debug input");
+      printf("{input length variable} {0,1,2} where:\n");
+      printf("0: uniform distribution\n");
+      printf("1: normal distribution\n");
+      printf("2: debug input\n");
       return 1;
   }
   inputLength = atoi(argv[1]);
@@ -114,14 +114,14 @@ int main(int argc, char **argv) {
 
   // all zeroes
   else if(inputChoice == 2){
-      memset(hostInput, 0, inputLength);
+      memset(hostInput, 0, inputLength*sizeof(int));
       randomType = "debug";
   }
 
 
   //@@ Insert code below to create reference result in CPU
 
-  memset(resultRef, 0, NUM_BINS); // array zeroed
+  memset(resultRef, 0, NUM_BINS * sizeof(int)); // array zeroed
   for(int i = 0; i < inputLength; i++){
       int number = hostInput[i];
       if (resultRef[number] < 127){
@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
   cudaMemcpy(hostBins, deviceBins, NUM_BINS * sizeof(unsigned int), cudaMemcpyDeviceToHost);
 
   //@@ Insert code below to compare the output with the reference
-  printf("memcmp results (0 being equal): %d\n" , memcmp(resultRef, hostBins, NUM_BINS));
+  printf("memcmp results (0 being equal): %d\n" , memcmp(resultRef, hostBins, NUM_BINS*sizeof(int)));
 
   // log host bins
 
