@@ -334,18 +334,11 @@ __global__ void wmma_gemm(const half *A, const half *B, float *C,
         wmma::mma_sync(cFrag, aFrag, bFrag, cFrag);
     }
 
-    if (globalRow < M && globalCol < N) {
-        float tmp[WMMA_M * WMMA_N];
-        wmma::store_matrix_sync(tmp, cFrag, WMMA_N, wmma::mem_row_major);
-        for (int i = 0; i < WMMA_M; ++i) {
-            const int r = globalRow + i;
-            if (r >= M) break;
-            for (int j = 0; j < WMMA_N; ++j) {
-                const int c = globalCol + j;
-                if (c >= N) break;
-                C[r * ldc + c] = tmp[i * WMMA_N + j];
-            }
-        }
+    // CHANGED: store directly to global memory to avoid WMMA local-memory warnings.
+    // NOTE: This fast path requires a full 16x16 tile in-bounds.
+    if (globalRow + WMMA_M <= M && globalCol + WMMA_N <= N) {
+        wmma::store_matrix_sync(C + globalRow * ldc + globalCol, cFrag, ldc,
+                                wmma::mem_row_major);
     }
     (void)laneId; // silence unused warning
 }

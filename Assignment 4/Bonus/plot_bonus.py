@@ -35,11 +35,16 @@ def plot(rows: List[tuple], output: Path):
     width = 0.25
 
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.bar(x - width, cpu, width, label="CPU (double)")
-    ax.bar(x, gemm, width, label="gemm (float)")
-    ax.bar(x + width, wmma, width, label="wmma (tensor core)")
+    bars_cpu = ax.bar(x - width, cpu, width, label="CPU (double)")
+    bars_gemm = ax.bar(x, gemm, width, label="gemm (float)")
+    bars_wmma = ax.bar(x + width, wmma, width, label="wmma (tensor core)")
 
-    ax.set_ylabel("Runtime (ms)")
+    ax.bar_label(bars_cpu, padding=2, fmt="%.2g")
+    ax.bar_label(bars_gemm, padding=2, fmt="%.2g")
+    ax.bar_label(bars_wmma, padding=2, fmt="%.2g")
+
+    ax.set_yscale("log")
+    ax.set_ylabel("Runtime (ms, log scale)")
     ax.set_title("CPU vs gemm vs wmma runtime")
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
