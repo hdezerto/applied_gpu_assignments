@@ -1,0 +1,71 @@
+# Build outputs
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+*.pdb
+a.out
+build/
+bin/
+
+# Common generated CUDA assignment executables
+vectorAdd
+matrixMul
+reduction_base
+reduction_twoload
+reduction_shared
+reduction_shared_atomic
+reduction_full
+heat
+wmma_bonus
+hotspot
+bfs
+lud_cuda
+lud_omp
+
+# Profiling and benchmark outputs
+*.nvprof
+*.ncu-rep
+*.nsys-rep
+*.qdrep
+*.sqlite
+*.csv
+*.png
+*.txt
+!README.txt
+!**/README.txt
+!**/LICENSE.txt
+!**/inputfiles/*.inp
+convolution_basic.txt
+convolution_tiled.txt
+result.txt
+log.txt
+data/
+data_*/
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
